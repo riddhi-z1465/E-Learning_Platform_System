@@ -17,8 +17,8 @@ from app.types import (
 
 # Import resolvers
 from app.resolvers import (
-    get_instructors, get_instructor, create_instructor,
-    get_students, get_student, create_student,
+    get_instructors, get_instructor, create_instructor, delete_instructor,
+    get_students, get_student, create_student, delete_student,
     get_courses, get_course, create_course, archive_course,
     get_enrollments, get_student_enrollments, enroll_student, drop_enrollment,
     get_assessments, create_assessment,
@@ -53,7 +53,9 @@ class Query:
 @strawberry.type
 class Mutation:
     create_instructor: Instructor = strawberry.mutation(resolver=create_instructor)
+    delete_instructor: bool = strawberry.mutation(resolver=delete_instructor)
     create_student: Student = strawberry.mutation(resolver=create_student)
+    delete_student: bool = strawberry.mutation(resolver=delete_student)
     
     create_course: Course = strawberry.mutation(resolver=create_course)
     archive_course: Course = strawberry.mutation(resolver=archive_course)

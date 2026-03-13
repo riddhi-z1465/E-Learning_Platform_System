@@ -60,3 +60,14 @@ def create_instructor(input: CreateInstructorInput) -> Instructor:
             id=new_id, name=input.name, email=input.email,
             expertise=input.expertise, courses=[],
         )
+
+def delete_instructor(id: int) -> bool:
+    with get_session() as session:
+        # Check if the instructor exists first
+        r = session.run("MATCH (i:Instructor {id:$id}) RETURN i", id=id).single()
+        if not r:
+            raise ValueError(f"Instructor {id} not found")
+        
+        # DETACH DELETE removes the instructor node and any relationships (courses taught, etc.)
+        session.run("MATCH (i:Instructor {id:$id}) DETACH DELETE i", id=id)
+        return True

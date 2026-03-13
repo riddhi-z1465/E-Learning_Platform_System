@@ -30,3 +30,14 @@ def create_student(input: CreateStudentInput) -> Student:
             id=new_id, name=input.name, email=input.email,
         )
         return Student(id=new_id, name=input.name, email=input.email, status="active")
+
+def delete_student(id: int) -> bool:
+    with get_session() as session:
+        # Check if the student exists first
+        r = session.run("MATCH (s:Student {id:$id}) RETURN s", id=id).single()
+        if not r:
+            raise ValueError(f"Student {id} not found")
+        
+        # DETACH DELETE removes the student node and any relationships (enrollments, submissions, etc.)
+        session.run("MATCH (s:Student {id:$id}) DETACH DELETE s", id=id)
+        return True
