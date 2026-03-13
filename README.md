@@ -4,6 +4,8 @@ A robust **GraphQL API** designed for an E-Learning platform, built with **FastA
 
 It models complex relationships between students, instructors, courses, assessments, and submissions as a graph, making it highly efficient to navigate deep connections (e.g., getting a completion certificate requires traversing course enrollments, assessments, and submission scores).
 
+**Documentation:** [E-Learning Platform Documentation](https://docs.google.com/document/d/1b4VuupwuHMY_p-5eTYQY8_HM6n-GGEovYgoSQEZHySE/edit?usp=sharing)
+
 ## Features
 
 - **GraphQL API**: Exposes a flexible API using Strawberry GraphQL for fast and precise data fetching.
